@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Identity Verification</title>
+    <link rel="stylesheet" href="/verificationUpdate.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="verification-container" id="verification-container">
+    <!-- Progress indicator -->
+    <div class="verification-header">
+        <h1>Identity Verification</h1>
+        <div class="steps-indicator">
+            <div class="step active" id="step-document">
+                <div class="step-number">1</div>
+                <div class="step-label">Document</div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step" id="step-selfie">
+                <div class="step-number">2</div>
+                <div class="step-label">Selfie</div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step" id="step-review">
+                <div class="step-number">3</div>
+                <div class="step-label">Review</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="verification-instructions">
+        <p>Please provide clear photos of your identification document and a selfie to verify your identity.</p>
+    </div>
+
+    <!-- Document Selector -->
+    <div class="doc-type-options">
+        <label for="document-type" class="form-label">Document Type</label>
+        <div class="doc-type-class" id="document-dropdown-trigger">
+            <span id="selected-document">Select document type</span>
+            <i id="fas_arrow" class="fas fa-chevron-down"></i>
+        </div>
+        <div id="document-body">
+            <ul id="document-list" class="hidden">
+                <li data-document="Passport"><i class="fas fa-passport"></i> Passport</li>
+                <li data-document="Fayda"><i class="fas fa-id-card"></i> Fayda ID</li>
+            </ul>
+
+            <!-- Hidden input field to store the selected document type -->
+            <input type="hidden" id="document-type" name="document-type" required>
+        </div>
+    </div>
+
+    <!-- Passport Option -->
+    <div class="document-section passport hidden">
+        <div class="section-header" id="pass">
+            <h2><i class="fas fa-passport"></i> Passport Document</h2>
+        </div>
+
+        <div class="passport-bio">
+            <div class="photo-label">
+                <i class="fas fa-id-card"></i> Passport Bio Page
+                <span class="status-indicator">
+                    <div class="check-mark-bg">
+                        <i class="fas fa-check check-mark-green" style="display: none;"></i>
+                        <i class="fas fa-times check-mark-red"></i>
+                    </div>
+                </span>
+            </div>
+
+            <div class="preview-container">
+                <img id="passport-preview" class="preview" src="#" alt="Passport Preview" style="display: none;">
+            </div>
+
+            <button id="passport-capture-btn" class="capture-button">
+                <i class="fas fa-camera"></i>
+            </button>
+
+            <button class="retake-btn hidden" id="passport-retake-btn">
+                <i class="fas fa-rotate" style="color: red; font-size: 18px; padding: 5px;"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Fayda ID Option -->
+    <div class="document-section fayda hidden">
+        <div class="section-header">
+            <h2><i class="fas fa-id-card"></i> Fayda ID Card</h2>
+        </div>
+
+        <div class="fayda-front">
+            <div class="photo-label">
+                <i class="fas fa-credit-card"></i> ID Front Side
+                <span class="status-indicator">
+                    <div class="check-mark-bg">
+                        <i class="fas fa-check check-mark-green" style="display: none;"></i>
+                        <i class="fas fa-times check-mark-red"></i>
+                    </div>
+                </span>
+            </div>
+
+            <div class="preview-container">
+                <img id="id-front-preview" class="preview" src="#" alt="Front ID Preview" style="display: none;">
+            </div>
+
+            <button id="id-front-capture-btn" class="capture-button">
+                <i class="fas fa-camera"></i>
+            </button>
+
+            <button class="retake-btn hidden" id="id-front-retake-btn">
+                <i class="fas fa-rotate" style="color: red; font-size: 18px; padding: 5px;"></i>
+            </button>
+
+        </div>
+
+        <div class="fayda-back">
+            <div class="photo-label">
+                <i class="fas fa-credit-card"></i> ID Back Side
+                <span class="status-indicator">
+                    <div class="check-mark-bg">
+                        <i class="fas fa-check check-mark-green" style="display: none;"></i>
+                        <i class="fas fa-times check-mark-red"></i>
+                    </div>
+                </span>
+            </div>
+
+            <div class="preview-container">
+                <img id="id-back-preview" class="preview" src="#" alt="Back ID Preview" style="display: none;">
+            </div>
+
+            <button id="id-back-capture-btn" class="capture-button">
+                <i class="fas fa-camera"></i>
+            </button>
+
+            <button class="retake-btn hidden" id="id-back-retake-btn">
+                <i class="fas fa-rotate" style="color: red; font-size: 18px; padding: 5px;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Selfie Capture -->
+    <div class="document-section selfie hidden">
+        <div class="section-header">
+            <h2><i class="fas fa-user"></i> Selfie Verification</h2>
+        </div>
+
+        <div class="selfie-photo">
+            <div class="photo-label">
+                <i class="fas fa-camera"></i> Face Photo
+                <span class="status-indicator">
+                    <div class="check-mark-bg">
+                        <i class="fas fa-check check-mark-green" style="display: none;"></i>
+                        <i class="fas fa-times check-mark-red"></i>
+                    </div>
+                </span>
+            </div>
+
+            <div class="preview-container">
+                <img id="live-preview" class="preview" src="#" alt="Live Preview" style="display: none;">
+            </div>
+
+            <button id="selfie-capture-btn" class="capture-button">
+                <i class="fas fa-camera"></i>
+            </button>
+
+            <button class="retake-btn hidden" id="selfie-retake-btn">
+                <i class="fas fa-rotate" style="color: red; font-size: 18px; padding: 5px;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button id="submit-btn" class="submit-btn" disabled>
+        <div class="btn-text">Submit Verification</div>
+        <div class="spinner">
+            <div class="circle"></div>
+        </div>
+    </button>
+
+    <div class="verification-footer">
+        <span>Powered by:</span>
+        <img src="/101-logo.png" alt="101 Logo" class="logo-101">
+    </div>
+</div>
+
+<!-- Camera Capture Overlay (Hidden by default) -->
+<div id="camera-overlay" class="camera-overlay hidden">
+    <div class="doc-label" id="camera-label"></div>
+
+    <div class="camera-container">
+        <video id="camera-video" autoplay playsinline></video>
+        <div class="bar-container"></div>
+        <div class="container">
+
+            <div class="camera-guide" id="camera-guide">
+
+            </div>
+        </div>
+
+        <div class="camera-helper-text" id="camera-helper-text"></div>
+    </div>
+    <canvas id="capture-canvas" style="display:none;"></canvas>
+    <div class="camera-controls">
+        <button id="take-photo" class="camera-button capture-btn hidden"></button>
+        <button id="cancel-capture" class="camera-button cancel-btn">Cancel</button>
+    </div>
+</div>
+
+<!-- Image Modal -->
+<div id="image-modal" class="modal">
+    <span class="close">&times;</span>
+    <img id="modal-image" class="modal-content" src="" alt="Enlarged Image">
+</div>
+
+<div id="loading-overlay">
+  <div class="spinner-container">
+    <div class="spinner-two"></div>
+  </div>
+</div>
+
+<script src="verificationUpdate.js" type="module"></script>
+</body>
+</html>

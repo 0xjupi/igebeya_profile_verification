@@ -1,0 +1,837 @@
+:root {
+    --steps-primary: #1b9adf;
+    --primary: #279b9b;
+    --primary-dark: #207575;
+    --success: #10b981;
+    --danger: #ef4444;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-700: #374151;
+    --gray-900: #1f2937;
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Inter', 'Roboto', sans-serif;
+    line-height: 1.5;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+}
+
+.verification-container {
+    max-width: 600px;
+    margin: 20px auto 80px;
+    padding: 24px;
+    background: var(--tg-theme-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Header with steps indicator */
+.verification-header {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.verification-header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--tg-theme-text-color);
+}
+
+.steps-indicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex: 1;
+}
+
+.verification-footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.logo-101 {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-300);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--gray-300);
+    color: var(--gray-700);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.step.active .step-number {
+    border: 2px solid var(--success);
+    background-color: var(--steps-primary);
+    color: white;
+}
+
+.step.completed .step-number {
+    background-color: var(--success);
+    color: white;
+}
+
+.step-label {
+    font-size: 12px;
+    color: var(--gray-700);
+}
+
+.step-line {
+    position: absolute;
+    top: 15px;
+    height: 2px;
+    width: 100%;
+    background-color: var(--gray-300);
+    left: 50%;
+    z-index: 1;
+}
+
+/*.step:first-child .step-line {*/
+/*    display: none;*/
+/*}*/
+
+/* Document selector redesign */
+.doc-type-options {
+    margin: 24px 0;
+}
+
+.doc-type-class {
+    padding: 16px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.doc-type-class:hover {
+    border-color: var(--primary);
+}
+
+#document-list {
+    margin-top: 4px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#document-list li {
+    padding: 14px 16px;
+    cursor: pointer;
+    margin: 0;
+    transition: var(--transition);
+}
+
+#document-list li:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Document capture sections */
+.document-section {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px dashed var(--gray-300);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: var(--transition);
+}
+
+.document-section.active {
+    border-color: var(--primary);
+}
+
+.document-section.completed {
+    border-style: solid;
+    border-color: var(--success);
+}
+
+.selfie-photo, .passport-bio, .fayda-front, .fayda-back {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.selfie-photo.completed, .passport-bio.completed, .fayda-front.completed, .fayda-back.completed {
+    border-color: var(--success);
+}
+
+
+/* Photo label and icon */
+.photo-label {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.photo-label i {
+    margin-right: 8px;
+    color: var(--primary);
+}
+
+/* Status indicators */
+.status-indicator {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.check-mark-bg {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.check-mark-green {
+    color: var(--success);
+    font-size: 14px;
+}
+
+.check-mark-red {
+    color: var(--danger);
+    font-size: 14px;
+}
+
+/* Preview images */
+.preview-container {
+    position: relative;
+    margin: 0 16px;
+}
+
+.preview {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--success);
+    transition: var(--transition);
+}
+
+.preview:hover {
+    transform: scale(1.05);
+}
+
+/* Buttons */
+.capture-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.capture-button:hover {
+    background-color: var(--primary-dark);
+}
+
+.capture-button:disabled {
+    background-color: var(--gray-300);
+    cursor: not-allowed;
+}
+
+.capture-button i {
+    font-size: 14px;
+}
+
+.retake-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.retake-btn:hover {
+    opacity: 0.8;
+}
+
+.retake-btn:active {
+    transform: scale(0.97);
+}
+
+
+.submit-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    position: relative;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.submit-btn:disabled {
+    background-color: var(--gray-300);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Camera capture overlay */
+.camera-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.camera-container {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*min-height: 480px;*/
+}
+
+
+#camera-video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background-color: #333;
+    display: block;
+    margin: 0 auto;
+}
+
+.camera-guide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.camera-guide-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px dashed #dcdada;
+}
+
+/* Rectangular guide for documents */
+/* Passport guide styling */
+.camera-guide-passport {
+    /*transform: rotate(90deg);*/
+    position: relative;
+    height: 200px;
+    width: 750px;
+    border: 2px solid rgba(27, 154, 223, 0.61);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transform: rotate(90deg) scale(1.2);
+    transform-origin: center center;
+}
+
+/* Photo area in top left */
+.camera-guide-passport::before {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    width: 20%;
+    height: 40%;
+    border: 1px dashed rgba(231, 255, 12, 0.68);
+    border-radius: 4px;
+}
+
+/* MRZ area at bottom */
+.camera-guide-passport .mrz-area {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 90%;
+    height: 20%;
+    border: 1px dashed rgba(231, 255, 12, 0.68);
+    border-radius: 4px;
+}
+
+.camera-guide-passport .photo-label,
+.camera-guide-passport .mrz-label {
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    color: rgba(255, 12, 69, 0.54);
+    font-size: 10px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+
+.camera-guide-passport .photo-label {
+    top: 17%;
+    left: 5%;
+}
+
+
+.camera-guide-passport .mrz-label {
+    bottom: 26%;
+    left: 5%;
+}
+
+.mrz-area p {
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    color: rgba(72, 200, 38, 0.73);
+    font-size: 8px;
+    text-transform: uppercase;
+    pointer-events: none;
+    margin-left: 10px;
+}
+
+/* ID Front Camera Guide */
+.camera-guide-id-front {
+    /*transform: rotate(90deg);*/
+    position: relative;
+    height: 200px;
+    width: 750px;
+    border: 2px solid rgba(27, 154, 223, 0.61);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transform: rotate(90deg) scale(1.2);
+    transform-origin: center center;
+}
+
+/* Photo area in top left */
+.camera-guide-id-front::before {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    width: 32%;
+    height: 65%;
+    border: 1px dashed rgba(255, 12, 69, 0.71);
+    border-radius: 4px;
+}
+
+/* ID title area at top */
+.camera-guide-id-front .id-label-1 {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 15%;
+    border: 1px dashed rgba(255, 12, 69, 0.71);
+    border-radius: 4px;
+}
+
+.camera-guide-id-front .id-label-2 {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    width: 45%;
+    height: 50%;
+    border: 1px dashed rgba(255, 12, 69, 0.71);
+    border-radius: 4px;
+}
+
+.camera-guide-id-front .id-label-3 {
+    position: absolute;
+    bottom: 5%;
+    left: 40%;
+    width: 45%;
+    height: 15%;
+    border: 1px dashed rgba(255, 12, 69, 0.71);
+    border-radius: 4px;
+}
+
+/* ID Back Camera Guide */
+.camera-guide-id-back {
+    /*transform: rotate(90deg);*/
+    position: relative;
+    height: 200px;
+    width: 750px;
+    border: 2px solid rgba(27, 154, 223, 0.61);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transform: rotate(90deg) scale(1.2);
+    transform-origin: center center;
+}
+
+/* Photo area in top left */
+.camera-guide-id-back::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 30%;
+    height: 65%;
+    border: 1px dashed rgba(255, 12, 69, 0.71);
+    border-radius: 4px;
+}
+
+/* ID title area at top */
+.camera-guide-id-back .id-back-label-1 {
+    position: absolute;
+    top: 5%;
+    left: 43%;
+    width: 50%;
+    height: 75%;
+    border: 1px dashed rgba(255, 12, 69, 0.71);
+    border-radius: 4px;
+}
+
+.camera-guide-id-back .id-back-label-2 {
+    position: absolute;
+    bottom: 5%;
+    left: 10%;
+    width: 80%;
+    height: 10%;
+    border: 1px dashed rgba(255, 12, 69, 0.71);
+    border-radius: 4px;
+}
+
+
+/* Helper text */
+.camera-helper-text {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.camera-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    /*margin-top: 20px;*/
+}
+
+.cancel-btn {
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.capture-btn {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 4px solid rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s;
+}
+
+.capture-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
+.doc-label {
+    color: var(--tg-theme-text-color);;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Spinner for loading states */
+.spinner {
+    display: none;
+    margin-left: 10px;
+}
+
+.spinner.active {
+    display: block;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 10px 15px;
+    border-radius: 25px 25px 25px 25px;
+    max-height: 15%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+    max-width: 90%;
+    text-align: center;
+}
+
+.notification-top {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 10px 15px;
+    border-radius: 25px 25px 25px 25px;
+    max-height: 15%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+    max-width: 90%;
+    text-align: center;
+}
+
+.notification.success {
+    background-color: rgba(52, 58, 54, 0);
+    color: #28a745;
+}
+
+.notification.error {
+    background-color: rgba(78, 61, 62, 0);
+    color: #dc3545;
+}
+
+.notification-top.popupSuccess {
+    background-color: #28a745;
+}
+
+.notification-top.popupError {
+    background-color: #dc3545;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) translateX(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px) translateX(-50%);
+    }
+}
+
+/*Progress Bars*/
+/* Container positioning */
+/*.container {*/
+/*    position: relative;*/
+/*    width: 300px;*/
+/*    height: 300px;*/
+/*    margin: 0 auto;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+.bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background-color: #aaa;
+    transform-origin: center bottom;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1005;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.91);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-two {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
